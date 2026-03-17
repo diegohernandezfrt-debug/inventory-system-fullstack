@@ -81,7 +81,7 @@ function Dashboard() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/products",
+        "https://inventory-system-fullstack-production.up.railway.app",
         {
           headers: {
             Authorization: `Bearer ${token}`
