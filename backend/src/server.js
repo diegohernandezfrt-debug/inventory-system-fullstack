@@ -25,6 +25,7 @@ app.use('/dashboard', dashboardRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
+
   try {
     const users = await prisma.user.findMany();
 
