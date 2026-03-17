@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // Librería para hacer peticiones HTTP
-import axios from "axios";
+import api from "../api/api";
 import "../styles/dashboard.css";
 import { FaBox, FaWarehouse, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
@@ -80,14 +80,11 @@ function Dashboard() {
   const fetchProducts = async () => {
     try {
 
-      const res = await axios.get(
-        "http://localhost:3000/products",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+      const res = await api.get("/products", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
 
       setProducts(res.data);
 
@@ -104,14 +101,11 @@ function Dashboard() {
   const fetchMovements = async () => {
     try {
 
-      const res = await axios.get(
-        "http://localhost:3000/movements",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+      const res = await api.get("/movements", {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      );
+      });
 
       setMovements(res.data);
 
