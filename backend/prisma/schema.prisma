@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String   @unique
+    password  String
+    role      String   @default("user")
+    createdAt DateTime @default(now())
+  
+    stockMovements StockMovement[]
+    products Product[]
+
+    movements InventoryMovement[]
+  }
+  
+  model Category {
+    id       Int      @id @default(autoincrement())
+    name     String
+    products Product[]
+  }
+  
+  model Supplier {
+    id       Int      @id @default(autoincrement())
+    name     String
+    phone    String?
+    email    String?
+    products Product[]
+  }
+  
+  model Product {
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String?
+    price       Float
+    stock       Int      @default(0)
+    createdAt   DateTime @default(now())
+  
+    categoryId  Int?
+    supplierId  Int?
+  
+    category    Category? @relation(fields: [categoryId], references: [id])
+    supplier    Supplier? @relation(fields: [supplierId], references: [id])
+  
+    stockMovements StockMovement[]
+    userId    Int
+    user      User     @relation(fields: [userId], references: [id])
+
+    movements   InventoryMovement[]
+  }
+
+  model InventoryMovement {
+  id        Int      @id @default(autoincrement())
+  type      String   // "ENTRY" o "EXIT"
+  quantity  Int
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+
+  createdAt DateTime @default(now())
+}
+  
+  model StockMovement {
+    id        Int      @id @default(autoincrement())
+    type      String
+    quantity  Int
+    createdAt DateTime @default(now())
+  
+    productId Int
+    userId    Int
+  
+    product   Product @relation(fields: [productId], references: [id])
+    user      User    @relation(fields: [userId], references: [id])
+  }
