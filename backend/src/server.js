@@ -20,13 +20,19 @@ app.use('/inventory', inventoryRoutes);
 app.use('/movements',movementRoutes);
 app.use('/dashboard', dashboardRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API is running 🚀");
+app.get("/", async (req, res) => {
   try {
     const users = await prisma.user.findMany();
-    res.json({ message: "Backend funcionando", users });
+
+    res.json({
+      message: "API is running 🚀",
+      users
+    });
+
   } catch (error) {
-    res.status(500).json({ error: "Error de conexión" });
+    res.status(500).json({
+      error: "Error de conexión"
+    });
   }
 });
 
