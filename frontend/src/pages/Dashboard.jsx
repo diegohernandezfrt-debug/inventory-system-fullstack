@@ -81,7 +81,7 @@ function Dashboard() {
     try {
 
       const res = await axios.get(
-        "https://inventory-system-fullstack-production.up.railway.app",
+        "http://localhost:3000/products",
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -105,7 +105,7 @@ function Dashboard() {
     try {
 
       const res = await axios.get(
-        "https://inventory-system-fullstack-production.up.railway.app",
+        "http://localhost:3000/movements",
         {
           headers: {
             Authorization: `Bearer ${token}`
