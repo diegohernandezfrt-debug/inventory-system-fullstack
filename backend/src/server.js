@@ -13,7 +13,10 @@ const dashboardRoutes = require('./routes/dashboard.routes');
 
 app.use(express.json());
 app.use(cors({
-  origin: "https://dh-inventory-system-fullstack.vercel.app",
+  origin: [
+    "https://dh-inventory-system-fullstack.vercel.app",
+    "http://localhost:5173"
+  ],
   credentials: true
 }));
 
