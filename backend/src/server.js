@@ -20,7 +20,8 @@ app.use('/inventory', inventoryRoutes);
 app.use('/movements',movementRoutes);
 app.use('/dashboard', dashboardRoutes);
 
-app.get('/', async (req, res) => {
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
   try {
     const users = await prisma.user.findMany();
     res.json({ message: "Backend funcionando", users });
