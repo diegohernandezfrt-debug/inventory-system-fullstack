@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://inventory-system-fullstack-production.up.railway.app"
+  baseURL: import.meta.env.VITE_API_URL
 });
 
 export default api;
