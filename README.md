@@ -141,7 +141,7 @@ DATABASE_URL=your_database_url
 JWT_SECRET=your_secret_key
 ▶️ Installation
 1. Clone repo
-git clone https://github.com/your-username/inventory-system
+git clone [https://github.com/your-username/inventory-system](https://github.com/diegohernandezfrt-debug/inventory-system-fullstack)
 2. Backend
 cd backend
 npm install
